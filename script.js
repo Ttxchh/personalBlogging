@@ -50,61 +50,45 @@ fetch('mock-blog-data.json')
   })
   .catch(error => console.error(error));
 
-  // Get the "New Post" button
-const newPostButton = document.querySelector('.new-post-button');
+  // ----------------------------------------------
 
-// Get the blog posts container
-const blogPostsContainer = document.querySelector('.blog-posts-container');
+  // Get the button and popup
+var newPostBtn = document.getElementById("new-post-btn");
+var popup = document.querySelector(".popup");
 
-// Add a click event listener to the "New Post" button
-newPostButton.addEventListener('click', () => {
-  // Prompt the user to enter the new blog post details
-  const title = prompt('Enter the blog post title:');
-  const category = prompt('Enter the blog post category:');
-  const content = prompt('Enter the blog post content:');
-  const author = prompt('Enter the blog post author:');
-  const date = new Date().toLocaleDateString(); // Use the current date
-  
-  // Create the new blog post object
-  const newBlogPost = { title, category, content, author, date };
-  
-  // Create the new blog post card
-  const newBlogPostCard = document.createElement('div');
-  newBlogPostCard.classList.add('blog-post-card');
-  
-  // Create the new blog post card header
-  const newBlogPostCardHeader = document.createElement('div');
-  newBlogPostCardHeader.classList.add('blog-post-card-header');
-  
-  // Create the new blog post card title
-  const newBlogPostCardTitle = document.createElement('h2');
-  newBlogPostCardTitle.classList.add('blog-post-card-title');
-  newBlogPostCardTitle.textContent = newBlogPost.title;
-  
-  // Create the new blog post card category
-  const newBlogPostCardCategory = document.createElement('div');
-  newBlogPostCardCategory.classList.add('blog-post-card-category');
-  newBlogPostCardCategory.textContent = newBlogPost.category;
-  
-  // Append the title and category to the header
-  newBlogPostCardHeader.appendChild(newBlogPostCardTitle);
-  newBlogPostCardHeader.appendChild(newBlogPostCardCategory);
-  
-  // Create the new blog post card content
-  const newBlogPostCardContent = document.createElement('div');
-  newBlogPostCardContent.classList.add('blog-post-card-content');
-  newBlogPostCardContent.textContent = newBlogPost.content;
-  
-  // Create the new blog post card footer
-  const newBlogPostCardFooter = document.createElement('div');
-  newBlogPostCardFooter.classList.add('blog-post-card-footer');
-  newBlogPostCardFooter.textContent = `Posted on ${newBlogPost.date} by ${newBlogPost.author}`;
-  
-  // Append the header, content, and footer to the new blog post card
-  newBlogPostCard.appendChild(newBlogPostCardHeader);
-  newBlogPostCard.appendChild(newBlogPostCardContent);
-  newBlogPostCard.appendChild(newBlogPostCardFooter);
-  
-  // Prepend the new blog post card to the blog posts container
-  blogPostsContainer.insertBefore(newBlogPostCard, blogPostsContainer.firstChild);
-});
+// When the user clicks the button, show the popup
+newPostBtn.onclick = function() {
+  popup.style.display = "block";
+}
+
+// When the user clicks the close button, hide the popup
+var closeBtn = document.querySelector(".close");
+closeBtn.onclick = function() {
+  popup.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the popup, hide it
+window.onclick = function(event) {
+  if (event.target == popup) {
+    popup.style.display = "none";
+  }
+}
+
+// ----------------------------------------------
+// Need to work on the functionality to add new blog post in the popup
+
+// When the user submits the form, create a new post and add it to the page
+var submitBtn = document.getElementById("submit-post-btn");
+submitBtn.onclick = function(event) {
+  event.preventDefault();
+  var title = document.getElementById("title").value;
+  var category = document.getElementById("category").value;
+  var content = document.getElementById("content").value;
+  var date = new Date().toLocaleDateString();
+  var newPost = { "title": title, "category": category, "content": content, "date": date };
+  // Add code here to post the new data to the JSON file
+  // Then, add code to append the new post to the page
+  popup.style.display = "none";
+  document.getElementById("title").value = "";
+  document.getElementById("content").value = "";
+}
