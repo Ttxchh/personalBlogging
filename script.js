@@ -87,7 +87,7 @@ submitBtn.onclick = function(event) {
   var date = new Date().toLocaleDateString();
   var newPost = { "title": title, "category": category, "content": content, "date": date };
   // Add code here to post the new data to the JSON file
-  // Then, add code to append the new post to the page
+  // Then, add code to append the new post to the p
   popup.style.display = "none";
   document.getElementById("title").value = "";
   document.getElementById("content").value = "";
