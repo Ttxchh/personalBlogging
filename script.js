@@ -77,7 +77,7 @@ window.onclick = function(event) {
 // ----------------------------------------------
 // Need to work on the functionality to add new blog post in the popup
 
-/* // When the user submits the form, create a new post and add it to the page
+// When the user submits the form, create a new post and add it to the page
 var submitBtn = document.getElementById("submit-post-btn");
 submitBtn.onclick = function(event) {
   event.preventDefault();
@@ -92,74 +92,4 @@ submitBtn.onclick = function(event) {
   document.getElementById("title").value = "";
   document.getElementById("content").value = "";
 }
- */
-// Handler for submitting new post form
-function submitPostForm(event) {
-  event.preventDefault();
-
-  // Get form data
-  const title = document.getElementById('title').value;
-  const category = document.getElementById('category').value;
-  const content = document.getElementById('content').value;
-
-  // Create post data object
-  const postData = { title, category, content };
-
-  // Send post request to backend server
-  fetch('/posts', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(postData),
-  })
-    .then(response => response.text())
-    .then(message => {
-      console.log(message);
-      closePopup();
-    })
-    .catch(error => console.error(error));
-}
-
-
-// -----------------------------------------------
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-
-const app = express();
-const port = 3000;
-
-// Parse JSON request bodies
-app.use(bodyParser.json());
-
-// Endpoint for posting new blog post data
-app.post('/posts', (req, res) => {
-  const postData = req.body;
-
-  // Append new post data to JSON file
-  fs.readFile('posts.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error reading posts file');
-      return;
-    }
-
-    const posts = JSON.parse(data);
-    posts.push(postData);
-
-    fs.writeFile('posts.json', JSON.stringify(posts), 'utf8', (err) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error writing to posts file');
-        return;
-      }
-
-      res.send('Post added successfully');
-    });
-  });
-});
-
-// Start server
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
+ 
