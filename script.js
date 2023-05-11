@@ -87,9 +87,60 @@ submitBtn.onclick = function(event) {
   var date = new Date().toLocaleDateString();
   var newPost = { "title": title, "category": category, "content": content, "date": date };
   // Add code here to post the new data to the JSON file
-  // Then, add code to append the new post to the p
-  popup.style.display = "none";
+  // Then, add code to append the new post to the page
+  
+  // Example code to append the new post to the page
+  appendBlogPost(newPost);
+  
+  // Clear the form fields and hide the popup
   document.getElementById("title").value = "";
+  document.getElementById("category").value = "";
   document.getElementById("content").value = "";
+  popup.style.display = "none";
 }
- 
+
+// Function to append a new blog post to the page
+function appendBlogPost(blogPost) {
+  // Get the blog posts container
+  const blogPostsContainer = document.querySelector('.blog-posts-container');
+  
+  // Create the blog post card
+  const blogPostCard = document.createElement('div');
+  blogPostCard.classList.add('blog-post-card');
+  
+  // Create the blog post card header
+  const blogPostCardHeader = document.createElement('div');
+  blogPostCardHeader.classList.add('blog-post-card-header');
+  
+  // Create the blog post card title
+  const blogPostCardTitle = document.createElement('h2');
+  blogPostCardTitle.classList.add('blog-post-card-title');
+  blogPostCardTitle.textContent = blogPost.title;
+  
+  // Create the blog post card category
+  const blogPostCardCategory = document.createElement('div');
+  blogPostCardCategory.classList.add('blog-post-card-category');
+  blogPostCardCategory.textContent = blogPost.category;
+  
+  // Append the title and category to the header
+  blogPostCardHeader.appendChild(blogPostCardTitle);
+  blogPostCardHeader.appendChild(blogPostCardCategory);
+  
+  // Create the blog post card content
+  const blogPostCardContent = document.createElement('div');
+  blogPostCardContent.classList.add('blog-post-card-content');
+  blogPostCardContent.textContent = blogPost.content;
+  
+  // Create the blog post card footer
+  const blogPostCardFooter = document.createElement('div');
+  blogPostCardFooter.classList.add('blog-post-card-footer');
+  blogPostCardFooter.textContent = `Posted on ${blogPost.date} by ${blogPost.author}`;
+  
+  // Append the header, content, and footer to the blog post card
+  blogPostCard.appendChild(blogPostCardHeader);
+  blogPostCard.appendChild(blogPostCardContent);
+  blogPostCard.appendChild(blogPostCardFooter);
+
+  // Append the blog post card to the blog posts container
+  blogPostsContainer.appendChild(blogPostCard);
+}
