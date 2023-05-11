@@ -1,0 +1,50 @@
+Here's a breakdown of the code structure and functionality:
+
+HTML Structure:
+
+The HTML file starts with a doctype declaration and an opening <html> tag.
+Inside the <head> section, there is a title for the page and a link to an external CSS file.
+The <body> section contains the main content of the page.
+The <header> element includes the blog title and the "New Post" button.
+The <div> with the class "blog-posts-container" is an empty container for displaying the dynamically generated blog post cards.
+The <div> with the class "popup" represents the popup form for creating new blog posts.
+Inside the "popup" div, there is a form with input fields for title, category, and content, as well as a submit button.
+Finally, there is a <script> tag at the end to include the JavaScript file.
+CSS Styling:
+
+The CSS file contains various styles for different elements in the HTML.
+It defines the font family, background color, and layout properties for the body.
+The header has its own styles, including background color, color, and padding.
+The button has a green background color and other styling properties.
+The blog post container and popup have specific styles for positioning and appearance.
+The close button in the popup has its own styles for color and cursor behavior.
+There are also styles defined for form elements, blog post cards, and their individual components.
+JavaScript Functionality:
+
+The JavaScript code fetches blog post data from a JSON file (mock-blog-data.json) using the Fetch API.
+Once the data is retrieved, it loops through each blog post and dynamically generates HTML for the corresponding blog post card.
+The generated HTML elements are appended to the "blog-posts-container" div.
+Additionally, there is code that handles the functionality of the "New Post" button and the popup form.
+When the "New Post" button is clicked, the popup is displayed.
+Clicking the close button or anywhere outside the popup hides it.
+The submit button's click event is also handled to create a new blog post object and add it to the page.
+Please note that the JavaScript code references a JSON file ("mock-blog-data.json") that contains the data for the existing blog posts. To make the code fully functional, you would need to ensure that the JSON file is present and properly formatted. Additionally, the code does not include the functionality for posting the new data to the JSON file; you would need to implement that part separately.
+
+Creating new post:
+
+I've added the functionality to handle the form submission when the "submit-post-btn" button is clicked. When the button is clicked, the `onclick` event is triggered, and the code inside the event handler function is executed.
+
+Here's a breakdown of the changes:
+
+1. The `submitBtn.onclick` event handler is added to handle the button click event.
+2. The `event.preventDefault()` method is called to prevent the default form submission behavior, which would cause a page reload.
+3. The values of the input fields (`title`, `category`, and `content`) are retrieved using `document.getElementById`.
+4. The `date` variable is assigned the current date using `new Date().toLocaleDateString()`.
+5. A new blog post object is created using the retrieved values.
+6. You can add code to post the new blog post data to the JSON file if you have a server-side implementation to handle it.
+7. The `appendBlogPost` function is called with the new blog post object to dynamically generate and append the HTML for the new post to the page.
+8. Finally, the form fields are cleared, and the popup is hidden again.
+
+The `appendBlogPost` function is a helper function that takes a blog post object and generates the HTML elements for the blog post card. It follows a similar structure to the code in the original JavaScript snippet that dynamically generates blog post cards based on the data retrieved from the JSON file.
+
+Note: To fully implement the data posting to the JSON file, you would need to have a server-side implementation that handles the data submission and updates the JSON file accordingly.
